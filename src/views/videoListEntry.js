@@ -1,20 +1,30 @@
 var VideoListEntryView = Backbone.View.extend({
-  el: '.video-list',
+  // el: '.video-list',
   initialize: function() {
+    console.log('VideoListEntryView.js initialized');
     
-    this.render();
-  },
-
-  render: function() {
-    this.$el.append(this.template(this.model.attributes));    
-    return this;
+    
+    //this.model.on('change', this.render, this);
+    
   },
 
   events: {'click .video-list-entry-title': 'handleClick'},
 
   handleClick: function(e) {
-    console.log(e);    
+    
+    this.model.select();
+    
+    console.log(this.model.attributes.snippet.channelTitle);    
+  
   },
+
+  render: function() {
+    console.log('videolistentryview render');
+    this.$el.html(this.template(this.model.attributes));
+    return this.$el;
+  },
+
+  
 
   template: templateURL('src/templates/videoListEntry.html')
 

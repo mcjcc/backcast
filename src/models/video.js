@@ -3,7 +3,8 @@ var Video = Backbone.Model.extend({
   initialize: function(video) {
     // override youtube's complex id field
     this.set('id', video.id.videoId); 
-    this.set('snippet', video.snippet);
+    // this.set('snippet', video.snippet);
+
     // this.set('description', video.snippet.description);
     
   },
@@ -11,6 +12,11 @@ var Video = Backbone.Model.extend({
   select: function() {
     this.trigger('select', this);
     console.log('Video select() firing');
+    // when a video is selected, it passes a video into the VideoPlayerView();
+  
+    var player = new VideoPlayerView({model: this});
+    player.render();
+    // this.videoplayerview.render()
   }
 
 });
