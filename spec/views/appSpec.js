@@ -7,7 +7,6 @@ describe('AppView', function() {
     sinon.spy(SearchView.prototype, 'render');
     sinon.spy(AppView.prototype, 'render');
     sinon.spy(Backbone, 'ajax');
-
     view = new AppView();
     view.videos.reset(fakeVideoData);
   });
@@ -32,7 +31,7 @@ describe('AppView', function() {
     expect(VideoListView.prototype.render).to.have.callCount(1);
   });
 
-  xdescribe('when rendering live data from YouTube', function() {
+  describe('when rendering live data from YouTube', function() {
 
     it('should render a Search view', function() {
       expect(SearchView.prototype.render).to.have.callCount(1);

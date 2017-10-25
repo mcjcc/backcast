@@ -4,10 +4,16 @@ var AppView = Backbone.View.extend({
 
   initialize: function() {
     console.log('App.js initialize fn called!');
+
     // seting video model to the mock data/yt api
-    this.videos = new Videos(window.exampleVideoData);        
-    // this.myVideoPlayerView = new VideoPlayerView({model: this.videos.models[0]}).render();
+    // this.videos = new Videos(window.exampleVideoData);        
+    
+    this.videos = new Videos();
+
+    // this.on('change:videos', this.render, this);
     this.render();
+  
+
     
   },
 
@@ -24,7 +30,7 @@ var AppView = Backbone.View.extend({
     // this.myVideoPlayerView.render();
 
     // render search bar
-    // this.renderSearchView();
+    this.renderSearchView({collection: this.videos});
 
     return this;
   },
@@ -36,13 +42,15 @@ var AppView = Backbone.View.extend({
   },
 
   renderVideoPlayerView: function() {
-    console.log('this.videos', this.videos.models[0]);
+    console.log('this.videos', this.videos);
+    console.log('this.videos.models', this.videos.models);
+    console.log('this.videos.models[0]', this.videos.models[0]);
     var myVideoPlayerView = new VideoPlayerView({model: this.videos.models[0]}).render();
   },
 
-  // renderSearchView: function() {
-  //   new SearchView().render();
-  // },
+  renderSearchView: function(coll) {
+    new SearchView(coll).render();
+  },
 
   template: templateURL('src/templates/app.html')
 
